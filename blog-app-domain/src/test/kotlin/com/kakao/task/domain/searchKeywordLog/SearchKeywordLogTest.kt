@@ -15,7 +15,7 @@ class SearchKeywordLogTest : DescribeSpec({
             val searchKeywordLog = SearchKeywordLog(id,keyword,createdAt)
 
             searchKeywordLog.id shouldBe id
-            searchKeywordLog.keyword shouldBe keyword
+            searchKeywordLog.keyword.value shouldBe keyword
             searchKeywordLog.createdAt shouldBe createdAt
         }
 
