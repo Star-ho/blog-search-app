@@ -1,6 +1,6 @@
 package com.kakao.task.searchKeyword
 
-import com.kakao.task.domain.index.IndexRepository
+import com.kakao.task.domain.sequence.SequenceRepository
 import com.kakao.task.domain.searchKeyword.SearchKeyword
 import com.kakao.task.domain.searchKeyword.SearchKeywordRepository
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLog
@@ -12,23 +12,23 @@ import java.math.BigDecimal
 
 @Component
 class SearchKeywordScheduler(
-        private val indexRepository: IndexRepository,
+        private val sequenceRepository: SequenceRepository,
         private val searchKeywordLogRepository: SearchKeywordLogRepository,
         private val searchKeywordRepository: SearchKeywordRepository,
 ) {
     @Transactional
     @Scheduled(fixedDelay = 1000L)
     fun updateSearchKeyword() {
-        val lastUpdateLogIndex = indexRepository.findLastUpdateSearchIndex()
-        val searchKeywordLogList = searchKeywordLogRepository.findByGraterThanId(lastUpdateLogIndex)
+        val lastUpdateLogSequence = sequenceRepository.findLastUpdateSearchSequence()
+        val searchKeywordLogList = searchKeywordLogRepository.findByGraterThanId(lastUpdateLogSequence)
         if (searchKeywordLogList.isEmpty()) return
 
         val keywordHitCountMap = createKeywordHitCountMap(searchKeywordLogList)
 
         updateSearchKeywordHitCount(keywordHitCountMap)
 
-        val lastLogIndex = searchKeywordLogList.maxBy { it.id }.id
-        indexRepository.saveLastUpdateLogIndex(lastLogIndex)
+        val lastLogSequence = searchKeywordLogList.maxBy { it.id }.id
+        sequenceRepository.saveLastUpdateLogSequence(lastLogSequence)
     }
 
     private fun createKeywordHitCountMap(searchKeywordLogList:List<SearchKeywordLog>): Map<String, BigDecimal> {
