@@ -2,10 +2,10 @@ package com.kakao.task.blogSearch
 
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLog
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLogRepository
-import com.kakao.task.externalApi.BlogSearchResponse
+import com.kakao.task.domain.blogSearch.BlogSearchResponse
 import com.kakao.task.externalApi.KakaoBlogSearch
 import com.kakao.task.externalApi.NaverBlogSearch
-import com.kakao.task.externalApi.SearchRequest
+import com.kakao.task.domain.blogSearch.SearchRequest
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -22,7 +22,7 @@ class BlogSearchServiceUnitTest : DescribeSpec({
 
     describe("블로그 검색 테스트 "){
 
-        val searchRequest = SearchRequest("query",SearchRequest.Sort.accuracy,1,10)
+        val searchRequest = SearchRequest("query", SearchRequest.Sort.accuracy,1,10)
         val blogSearchResponse = BlogSearchResponse(
                 BlogSearchResponse.Meta(10,10,false),
                 listOf(BlogSearchResponse.Document("title","contents","url","blogname","datetime"))
