@@ -17,7 +17,6 @@ class BlogSearchService(
         private val searchKeywordLogRepository: SearchKeywordLogRepository,
         private val searchKeywordRepository: SearchKeywordRepository
 ) {
-    //TODO: 2023/03/20 h2 스키마 만들기  - 성호
     //TODO: 2023/03/20 카카오 조회 실패시 네이버 조회 로직  - 성호
     // ++ 테스트
     fun getData(searchRequest: SearchRequest): BlogSearchResponse? {
