@@ -1,4 +1,4 @@
-package com.kakao.task.searchKeyword
+package com.kakao.task.service
 
 import com.kakao.task.domain.sequence.SequenceRepository
 import com.kakao.task.domain.searchKeyword.SearchKeyword

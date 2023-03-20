@@ -1,4 +1,4 @@
-package com.kakao.task.service
+package com.kakao.task.blogSearch
 
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLog
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLogRepository
