@@ -1,7 +1,8 @@
 package com.kakao.task.blogSearch
 
-import com.kakao.task.externalApi.SearchRequest
-import com.kakao.task.externalApi.BlogSearchResponse
+import com.kakao.task.domain.blogSearch.SearchRequest
+import com.kakao.task.domain.blogSearch.BlogSearchResponse
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
