@@ -1,8 +1,8 @@
-package com.kakao.task.domain.index
+package com.kakao.task.domain.sequence
 
 //TODO: 2023/03/19 삭제 고민  - 성호
 class Index(
-        val name:IndexName,
+        val name:SequenceName,
         sequence: Long
 ){
     val sequence = Sequence(sequence)
@@ -15,6 +15,6 @@ class Sequence(sequence:Long){
         this.value = sequence
     }
 }
-enum class IndexName{
+enum class SequenceName{
     LAST_BATCH_INDEX
 }
