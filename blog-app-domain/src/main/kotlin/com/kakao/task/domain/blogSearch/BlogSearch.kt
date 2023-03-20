@@ -1,4 +1,4 @@
-package com.kakao.task.externalApi
+package com.kakao.task.domain.blogSearch
 
 interface BlogSearch{
     fun getBlogData(searchRequest: SearchRequest): BlogSearchResponse?
@@ -31,7 +31,6 @@ class BlogSearchResponse(
             val contents:String,
             val url:String,
             val blogname:String,
-            val thumbnail:String,
             val datetime: String
     )
 }
