@@ -15,7 +15,7 @@ class PopularKeywordServiceUnitTest : DescribeSpec({
 
     val searchKeywordList = listOf(
             SearchKeyword(keyword = "keyword", hitCount = BigDecimal.ONE),
-            SearchKeyword(keyword = "keyword", hitCount = BigDecimal.TWO),
+            SearchKeyword(keyword = "keyword2", hitCount = BigDecimal.TWO),
     )
 
     describe("인기 검색어 조회 테스트") {
