@@ -53,8 +53,7 @@ class KakaoSearchRequest(
                         return it
                     }
                 }
-                //TODO: '2023/03/19' EXCEOPTION 클래스 만들기  - 성호
-                throw ClassNotFoundException()
+                throw IllegalArgumentException("해당 정렬 방식은 존재하지 않습니다")
             }
         }
     }
