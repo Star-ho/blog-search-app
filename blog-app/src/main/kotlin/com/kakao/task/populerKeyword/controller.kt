@@ -1,5 +1,6 @@
 package com.kakao.task.populerKeyword
 
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController
 class PopularKeywordController(
         private val popularKeywordService: PopularKeywordService
 ){
-    @GetMapping("/popular-search-keyword")
-    fun getPopularSearchKeyword(): List<GetPopularSearchKeywordResponse> {
-        return popularKeywordService.getPopularSearchKeyword()
+    @GetMapping("/popular-keyword")
+    fun getPopularSearchKeyword(): ResponseEntity<List<GetPopularSearchKeywordResponse>> {
+        return ResponseEntity.ok(popularKeywordService.getPopularSearchKeyword())
     }
 }

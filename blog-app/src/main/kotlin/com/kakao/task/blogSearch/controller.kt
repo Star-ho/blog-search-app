@@ -12,8 +12,8 @@ class BlogSearchController(
         private val blogSearchService: BlogSearchService,
 ) {
     @GetMapping("/blog/search")
-    fun searchBlog(searchRequest: SearchRequest): BlogSearchResponse? {
-        return blogSearchService.getData(searchRequest)
+    fun searchBlog(searchRequest: SearchRequest): ResponseEntity<BlogSearchResponse> {
+        return ResponseEntity.ok(blogSearchService.getData(searchRequest))
     }
 }
 
