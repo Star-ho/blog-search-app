@@ -7,8 +7,8 @@ import com.kakao.task.externalApi.KakaoBlogSearch
 import com.kakao.task.externalApi.SearchRequest
 import com.kakao.task.externalApi.BlogSearchResponse
 import com.kakao.task.externalApi.NaverBlogSearch
+import kotlinx.serialization.Serializable
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
 
 @Service
 class BlogSearchService(
@@ -34,11 +34,12 @@ class BlogSearchService(
 
     fun getPopularSearchKeyword(): List<GetPopularSearchKeywordResponse> {
         return searchKeywordRepository.findByTop10SearchKeyword()
-                .map { GetPopularSearchKeywordResponse(it.keyword.value,it.hitCount) }
+                .map { GetPopularSearchKeywordResponse(it.keyword.value,it.hitCount.toString()) }
     }
 }
 
+@Serializable
 class GetPopularSearchKeywordResponse(
         val keyword:String,
-        val hitCount:BigDecimal,
+        val hitCount:String,
 )
