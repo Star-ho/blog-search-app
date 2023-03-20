@@ -19,7 +19,7 @@ class PopularKeywordServiceUnitTest : DescribeSpec({
     )
 
     describe("인기 검색어 조회 테스트") {
-        it("함수 호출 확인"){
+        it("findByTop10SearchKeyword 호출 확인"){
             every { searchKeywordRepository.findByTop10SearchKeyword() } returns searchKeywordList
 
             popularKeywordService.getPopularSearchKeyword()
