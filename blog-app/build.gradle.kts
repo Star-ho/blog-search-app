@@ -36,5 +36,5 @@ dependencies {
 	testImplementation("io.kotest:kotest-runner-junit5:${rootProject.extra.get("kotestVersion")}")
 	testImplementation("io.kotest:kotest-assertions-core:${rootProject.extra.get("kotestVersion")}")
 	testImplementation("io.kotest:kotest-extensions-spring:${rootProject.extra.get("kotestVersion")}")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	testImplementation("com.ninja-squad:springmockk:3.0.1")
 }
