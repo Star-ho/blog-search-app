@@ -34,12 +34,12 @@ class SearchKeywordDao(
 
 interface SearchKeywordJpaRepository: JpaRepository<SearchKeywordDao, Long>, JpaSpecificationExecutor<SearchKeywordDao>{
 
-        @Query("select SKW from SearchKeywordDao SKW order by SKW.hitCount limit 10")
+        @Query("select SKW from SearchKeywordDao SKW order by SKW.hitCount desc limit 10")
         fun findByTop10SearchKeyword():List<SearchKeywordDao>
 
         fun findByKeyword(keyword: String):SearchKeywordDao?
 
         @Modifying(clearAutomatically = true)
         @Query("update SEARCH_KEYWORD skd set skd.HIT_COUNT = skd.HIT_COUNT + :hitCount where skd.KEYWORD = :keyword", nativeQuery = true)
-        fun updateHitCountByKeyword(keyword: String,@Param("hitCount") hitCount: BigDecimal)
+        fun updateHitCountByKeyword(keyword: String,@Param("hitCount") hitCount: BigDecimal):Int
 }

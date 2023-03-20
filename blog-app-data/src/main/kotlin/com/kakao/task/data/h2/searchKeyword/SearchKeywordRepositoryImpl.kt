@@ -2,6 +2,7 @@ package com.kakao.task.data.h2.searchKeyword
 
 import com.kakao.task.domain.searchKeyword.SearchKeyword
 import com.kakao.task.domain.searchKeyword.SearchKeywordRepository
+import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Repository
 import java.math.BigDecimal
 
@@ -18,7 +19,8 @@ class SearchKeywordRepositoryImpl(
     }
 
     override fun updateSearchKeywordHitCount(keyword: String, addedHitCount:BigDecimal){
-        searchKeywordJpaRepository.updateHitCountByKeyword(keyword,addedHitCount)
+        val updateRowNum = searchKeywordJpaRepository.updateHitCountByKeyword(keyword,addedHitCount)
+        if(updateRowNum != 1) throw EntityNotFoundException("검색 키워드가 존재하지 않습니다")
     }
 
     override fun save(searchKeyword: SearchKeyword){
