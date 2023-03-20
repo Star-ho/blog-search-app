@@ -2,10 +2,10 @@ package com.kakao.task.blogSearch
 
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLog
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLogRepository
-import com.kakao.task.externalApi.BlogSearchResponse
+import com.kakao.task.domain.blogSearch.BlogSearchResponse
 import com.kakao.task.externalApi.KakaoBlogSearch
 import com.kakao.task.externalApi.NaverBlogSearch
-import com.kakao.task.externalApi.SearchRequest
+import com.kakao.task.domain.blogSearch.SearchRequest
 import org.springframework.stereotype.Service
 
 @Service
