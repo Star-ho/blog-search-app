@@ -18,7 +18,7 @@ class SearchKeywordScheduler(
 ) {
     @Transactional
     @Scheduled(fixedDelay = 1000L)
-    fun updateSearchKeyword() {
+    fun updateSearchKeywordHitCount() {
         val lastUpdateLogSequence = sequenceRepository.findLastUpdateSearchSequence()
         val searchKeywordLogList = searchKeywordLogRepository.findByGraterThanId(lastUpdateLogSequence)
         if (searchKeywordLogList.isEmpty()) return
