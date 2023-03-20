@@ -1,4 +1,4 @@
-package com.kakao.task.searchKeyword
+package com.kakao.task.service
 
 import com.kakao.task.domain.searchKeyword.SearchKeywordRepository
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLog
@@ -8,6 +8,7 @@ import com.kakao.task.externalApi.SearchRequest
 import com.kakao.task.externalApi.BlogSearchResponse
 import com.kakao.task.externalApi.NaverBlogSearch
 import kotlinx.serialization.Serializable
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 
 @Service
@@ -15,7 +16,6 @@ class BlogSearchService(
         private val kakaoBlogSearch: KakaoBlogSearch,
         private val naverBlogSearch: NaverBlogSearch,
         private val searchKeywordLogRepository: SearchKeywordLogRepository,
-        private val searchKeywordRepository: SearchKeywordRepository
 ) {
     //TODO: 2023/03/20 카카오 조회 실패시 네이버 조회 로직  - 성호
     // ++ 테스트
@@ -31,7 +31,12 @@ class BlogSearchService(
 
         return res
     }
+}
 
+@Component
+class PopularKeywordService(
+        private val searchKeywordRepository: SearchKeywordRepository
+){
     fun getPopularSearchKeyword(): List<GetPopularSearchKeywordResponse> {
         return searchKeywordRepository.findByTop10SearchKeyword()
                 .map { GetPopularSearchKeywordResponse(it.keyword.value,it.hitCount.toString()) }
