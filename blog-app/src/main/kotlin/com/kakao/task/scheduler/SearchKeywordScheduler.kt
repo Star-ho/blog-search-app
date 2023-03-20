@@ -1,4 +1,4 @@
-package com.kakao.task.service
+package com.kakao.task.scheduler
 
 import com.kakao.task.domain.sequence.SequenceRepository
 import com.kakao.task.domain.searchKeyword.SearchKeyword
@@ -50,7 +50,7 @@ class SearchKeywordScheduler(
                 searchKeywordRepository.save(SearchKeyword(keyword = it.key, hitCount = it.value))
                 return@forEach
             }
-            searchKeywordRepository.updateSearchKeywordHitCount(keyword = it.key, addedHitCount = it.value)
+            searchKeywordRepository.updateSearchKeywordHitCount(id = searchKeyword.id, addedHitCount = it.value)
         }
     }
 
