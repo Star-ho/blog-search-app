@@ -13,6 +13,9 @@ dependencies {
 
     // jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // database
+    runtimeOnly("com.h2database:h2")
 }
 
 allOpen {
