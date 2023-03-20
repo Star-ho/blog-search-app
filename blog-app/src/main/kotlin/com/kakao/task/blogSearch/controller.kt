@@ -1,4 +1,4 @@
-package com.kakao.task.searchKeyword
+package com.kakao.task.blogSearch
 
 import com.kakao.task.externalApi.SearchRequest
 import com.kakao.task.externalApi.BlogSearchResponse
@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping
 class BlogSearchController(
-        private val blogSearchService: BlogSearchService
+        private val blogSearchService: BlogSearchService,
 ) {
     @GetMapping("/blog/search")
     fun searchBlog(searchRequest: SearchRequest): BlogSearchResponse? {
         return blogSearchService.getData(searchRequest)
     }
-
-    @GetMapping("/popular-search-keyword")
-    fun getPopularSearchKeyword(): List<GetPopularSearchKeywordResponse> {
-        return blogSearchService.getPopularSearchKeyword()
-    }
 }
+
+
 
