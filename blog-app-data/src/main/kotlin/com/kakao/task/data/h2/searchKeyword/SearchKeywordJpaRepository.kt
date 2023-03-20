@@ -40,6 +40,6 @@ interface SearchKeywordJpaRepository: JpaRepository<SearchKeywordDao, Long>, Jpa
         fun findByKeyword(keyword: String):SearchKeywordDao?
 
         @Modifying(clearAutomatically = true)
-        @Query("update SEARCH_KEYWORD skd set skd.HIT_COUNT = skd.HIT_COUNT + :hitCount where skd.KEYWORD = :keyword", nativeQuery = true)
-        fun updateHitCountByKeyword(keyword: String,@Param("hitCount") hitCount: BigDecimal):Int
+        @Query("update SEARCH_KEYWORD skd set skd.HIT_COUNT = skd.HIT_COUNT + :hitCount where skd.ID = :id", nativeQuery = true)
+        fun updateHitCountByKeyword(id:Long,@Param("hitCount") hitCount: BigDecimal):Int
 }

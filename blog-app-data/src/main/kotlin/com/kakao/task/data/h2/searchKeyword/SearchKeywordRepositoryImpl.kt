@@ -18,8 +18,8 @@ class SearchKeywordRepositoryImpl(
         return searchKeywordJpaRepository.findByKeyword(keyword)?.toEntity()
     }
 
-    override fun updateSearchKeywordHitCount(keyword: String, addedHitCount:BigDecimal){
-        val updateRowNum = searchKeywordJpaRepository.updateHitCountByKeyword(keyword,addedHitCount)
+    override fun updateSearchKeywordHitCount(id:Long, addedHitCount:BigDecimal){
+        val updateRowNum = searchKeywordJpaRepository.updateHitCountByKeyword(id,addedHitCount)
         if(updateRowNum != 1) throw EntityNotFoundException("검색 키워드가 존재하지 않습니다")
     }
 

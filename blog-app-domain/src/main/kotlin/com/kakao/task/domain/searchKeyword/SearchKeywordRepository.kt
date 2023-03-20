@@ -7,7 +7,7 @@ interface SearchKeywordRepository{
 
     fun findByKeyword(keyword:String): SearchKeyword?
 
-    fun updateSearchKeywordHitCount(keyword: String,addedHitCount: BigDecimal)
+    fun updateSearchKeywordHitCount(id:Long,addedHitCount: BigDecimal)
 
     fun save(searchKeyword: SearchKeyword)
 }

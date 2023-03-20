@@ -99,8 +99,8 @@ class SearchKeywordRepositoryTest(
                 }
             }
 
-            context("키워드로 조회수 수정 테스트"){
-                it("키워드가 존재할떄") {
+            context("id로 조회수 수정 테스트"){
+                it("id가 존재할떄") {
                     val keyword = "keyword"
                     val hitCount = BigDecimal.TEN
                     entityManager.persist(SearchKeywordDao(0, keyword,hitCount))
@@ -108,7 +108,7 @@ class SearchKeywordRepositoryTest(
                     entityManager.clear()
 
                     val hitCountForAdd = BigDecimal(13)
-                    searchKeywordRepository.updateSearchKeywordHitCount(keyword,hitCountForAdd)
+                    searchKeywordRepository.updateSearchKeywordHitCount(1,hitCountForAdd)
 
                     val searchKeywordDao = entityManager.createQuery(
                             "select SKD from SearchKeywordDao SKD where SKD.keyword = keyword",SearchKeywordDao::class.java
@@ -120,13 +120,11 @@ class SearchKeywordRepositoryTest(
                     searchKeywordDao.hitCount.compareTo(hitCount.plus(hitCountForAdd)) shouldBe 0
                 }
 
-                it("키워드가 존재하지 않을때") {
-                    val keyword = "keyword"
-
+                it("id가 존재하지 않을때") {
                     val hitCountForAdd = BigDecimal(13)
 
                     shouldThrow<JpaObjectRetrievalFailureException>{
-                        searchKeywordRepository.updateSearchKeywordHitCount(keyword, hitCountForAdd)
+                        searchKeywordRepository.updateSearchKeywordHitCount(3, hitCountForAdd)
                     }
                 }
             }
