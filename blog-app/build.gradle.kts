@@ -20,11 +20,16 @@ dependencies {
 
 	runtimeOnly("com.h2database:h2")
 
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	implementation("io.ktor:ktor-client-core:$ktorVersion")
 	implementation("io.ktor:ktor-client-cio:$ktorVersion")
 	implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 	implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.kotest:kotest-runner-junit5:${rootProject.extra.get("kotestVersion")}")
+	testImplementation("io.kotest:kotest-assertions-core:${rootProject.extra.get("kotestVersion")}")
+	testImplementation("io.kotest:kotest-extensions-spring:${rootProject.extra.get("kotestVersion")}")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 }
