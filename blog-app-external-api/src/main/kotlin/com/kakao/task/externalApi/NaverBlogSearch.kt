@@ -1,5 +1,8 @@
 package com.kakao.task.externalApi
 
+import com.kakao.task.domain.blogSearch.BlogSearch
+import com.kakao.task.domain.blogSearch.BlogSearchResponse
+import com.kakao.task.domain.blogSearch.SearchRequest
 import kotlinx.serialization.Serializable
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
