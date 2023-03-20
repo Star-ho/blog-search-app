@@ -22,15 +22,3 @@ class BlogSearchController(
     }
 }
 
-//TODO: 2023/03/20 exception hander 만들기  - 성호
-//TODO: 2023/03/20 system core로 옮기기  - 성호
-//@Converter(autoApply = true)
-//class ZonedDateTimePersistenceConverter() : AttributeConverter<ZonedDateTime, Date> {
-//    override fun convertToDatabaseColumn(datetime: ZonedDateTime?): Date? {
-//        return datetime?.let { Date.from(it.toInstant()) }
-//    }
-//
-//    override fun convertToEntityAttribute(date: Date?): ZonedDateTime? {
-//        return date?.let { ZonedDateTime.of(LocalDateTime.ofInstant(it.toInstant(), App.APP_ZONE_ID), App.APP_ZONE_ID) }
-//    }
-//}
