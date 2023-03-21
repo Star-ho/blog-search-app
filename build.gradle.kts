@@ -11,7 +11,7 @@ plugins {
     kotlin("plugin.jpa") version kotlinPluginVersion apply false
 }
 
-group = "com.kakao"
+group = "com.blog"
 version = "0.0.1-SNAPSHOT"
 
 subprojects{
