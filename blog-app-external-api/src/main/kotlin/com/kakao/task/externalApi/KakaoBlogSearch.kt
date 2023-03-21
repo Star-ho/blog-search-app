@@ -41,10 +41,10 @@ class KakaoBlogSearch: BlogSearch {
     fun calculateStartIndex(kakaoSearchRequest: KakaoSearchRequest): Int {
         return kakaoSearchRequest.page*(kakaoSearchRequest.size-1)
     }
-}
 
-private fun SearchRequest.toKakaoSearchRequest(): KakaoSearchRequest {
-    return KakaoSearchRequest(query, KakaoSearchRequest.Sort.of(this.sort.name),page, size)
+    private fun SearchRequest.toKakaoSearchRequest(): KakaoSearchRequest {
+        return KakaoSearchRequest(query, KakaoSearchRequest.Sort.of(this.sort.name),page, size)
+    }
 }
 @Serializable
 class KakaoSearchRequest(

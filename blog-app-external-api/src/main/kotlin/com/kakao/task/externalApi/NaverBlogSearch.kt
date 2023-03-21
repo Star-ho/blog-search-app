@@ -39,11 +39,12 @@ class NaverBlogSearch: BlogSearch {
                 .bodyToMono(NaverBlogSearchResponse::class.java)
                 .block()?.toBlogSearchResponse()
     }
+
+    private fun SearchRequest.toNaverSearchRequest(): NaverBlogSearchRequest {
+        return NaverBlogSearchRequest(query, size, (page*size)-(size)+1, NaverBlogSearchRequest.Sort.of(this.sort.name))
+    }
 }
 
-private fun SearchRequest.toNaverSearchRequest(): NaverBlogSearchRequest {
-    return NaverBlogSearchRequest(query, size, (page*size)-(size-1), NaverBlogSearchRequest.Sort.of(this.sort.name))
-}
 @Serializable
 class NaverBlogSearchRequest(
         val query:String,
