@@ -12,6 +12,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
+import java.time.LocalDate
 
 class BlogSearchServiceUnitTest : DescribeSpec({
     val kakaoBlogSearch: KakaoBlogSearch = mockk()
@@ -24,8 +25,8 @@ class BlogSearchServiceUnitTest : DescribeSpec({
 
         val searchRequest = SearchRequest("query", SearchRequest.Sort.accuracy,1,10)
         val blogSearchResponse = BlogSearchResponse(
-                BlogSearchResponse.Meta(10,10,false),
-                listOf(BlogSearchResponse.Document("title","contents","url","blogname","datetime"))
+                BlogSearchResponse.Meta(10,1,10),
+                listOf(BlogSearchResponse.Document("title","contents","url","blog-name", LocalDate.now()))
         )
         every { searchKeywordLogRepository.save(any()) } returns Unit
 
