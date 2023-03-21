@@ -22,9 +22,9 @@ class BlogSearchResponse(
 ){
     class Meta(
             //TODO: 2023/03/20 페이지 카운트 구할때 에러  - 성호
-            val totalCount:Int,
-            val pageableCount:Int,
-            val is_end:Boolean
+            val total:Int,
+            val start:Int,
+            val size:Int
     )
     class Document(
             val title:String,
