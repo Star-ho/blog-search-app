@@ -37,6 +37,6 @@ class BlogSearchResponse(
             val contents:String,
             val url:String,
             val blogname:String,
-            val datetime: String
+            val datetime: LocalDate
     )
 }
