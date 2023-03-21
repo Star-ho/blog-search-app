@@ -1,5 +1,6 @@
 package com.kakao.task.externalApi
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.kakao.task.domain.blogSearch.BlogSearch
 import com.kakao.task.domain.blogSearch.BlogSearchResponse
 import com.kakao.task.domain.blogSearch.SearchRequest
@@ -7,6 +8,7 @@ import kotlinx.serialization.Serializable
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
+import java.time.LocalDate
 
 private const val NAVER_API_HOST = "openapi.naver.com"
 private const val NAVER_BLOG_SEARCH_API_PATH = "/v1/search/blog"
@@ -40,7 +42,7 @@ class NaverBlogSearch: BlogSearch {
 }
 
 private fun SearchRequest.toNaverSearchRequest(): NaverBlogSearchRequest {
-    return NaverBlogSearchRequest(query, size, page, NaverBlogSearchRequest.Sort.of(this.sort.name))
+    return NaverBlogSearchRequest(query, size, (page*size)-(size-1), NaverBlogSearchRequest.Sort.of(this.sort.name))
 }
 @Serializable
 class NaverBlogSearchRequest(
@@ -64,7 +66,6 @@ class NaverBlogSearchRequest(
     }
 }
 
-@Serializable
 class NaverBlogSearchResponse(
         val lastBuildDate:String,
         val total:Int,
@@ -72,20 +73,20 @@ class NaverBlogSearchResponse(
         val display:Int,
         val items:List<Item>
 ){
-    @Serializable
     class Item(
             val title:String,
             val link: String,
             val description:String,
             val bloggername:String,
             val bloggerlink:String,
-            val postdate: String,
+            @JsonFormat(pattern = "yyyyMMdd")
+            val postdate: LocalDate,
     )
+
     fun toBlogSearchResponse(): BlogSearchResponse {
-        //TODO: 2023/03/19 매핑 수정할것  - 성호
         return BlogSearchResponse(
-                BlogSearchResponse.Meta(total,start/display,total <= (start*display+display)),
-                items.map { it.run { BlogSearchResponse.Document(title,description,link,title,"thumbname",postdate) } }
+                BlogSearchResponse.Meta(total,start,display),
+                items.map { it.run { BlogSearchResponse.Document(title,description,link,bloggername,postdate) } }
         )
     }
 }

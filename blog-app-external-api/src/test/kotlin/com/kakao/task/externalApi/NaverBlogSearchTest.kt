@@ -1,5 +1,6 @@
 package com.kakao.task.externalApi
 
+import com.kakao.task.domain.blogSearch.SearchRequest
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
@@ -27,12 +28,12 @@ class NaverBlogSearchTest:DescribeSpec({
             it("첫번째 페이지 요청") {
                 val request = SearchRequest("test", SearchRequest.Sort.accuracy, 1, 10)
                 val res = naverBlogSearch.getBlogData(request)
-                res?.meta?.pageableCount shouldBe 1
+                res?.meta?.start shouldBe 1
             }
             it("두번째 페이지 요청"){
                 val request = SearchRequest("test", SearchRequest.Sort.accuracy,2,10)
                 val res = naverBlogSearch.getBlogData(request)
-                res?.meta?.pageableCount shouldBe 2
+                res?.meta?.start shouldBe 11
             }
         }
 

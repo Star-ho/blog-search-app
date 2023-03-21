@@ -1,13 +1,19 @@
 package com.kakao.task.externalApi
 
+import com.kakao.task.domain.blogSearch.BlogSearch
+import com.kakao.task.domain.blogSearch.BlogSearchResponse
+import com.kakao.task.domain.blogSearch.SearchRequest
 import kotlinx.serialization.Serializable
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
+import java.time.ZonedDateTime
 
+//TODO: 2023/03/21 프로퍼티로 뺴기  - 성호
 private const val KAKAKO_API_HOST= "dapi.kakao.com"
 private const val KAKAO_BLOG_SEARCH_API_PATH = "/v2/search/blog"
 private const val KAKAO_AUTH = "KakaoAK 3a81015bc9f0bfb464989a4da0af716f"
+
 @Component
 class KakaoBlogSearch: BlogSearch {
     override fun getBlogData(searchRequest: SearchRequest): BlogSearchResponse? {
@@ -29,7 +35,11 @@ class KakaoBlogSearch: BlogSearch {
                     it.contentType = MediaType.APPLICATION_JSON
                 }.retrieve()
                 .bodyToMono(KakaoBlogSearchResponse::class.java)
-                .block()?.toBlogSearchResponse()
+                .block()?.toBlogSearchResponse(calculateStartIndex(kakaoSearchRequest),kakaoSearchRequest.size)
+    }
+
+    fun calculateStartIndex(kakaoSearchRequest: KakaoSearchRequest): Int {
+        return kakaoSearchRequest.page*(kakaoSearchRequest.size-1)
     }
 }
 
@@ -59,32 +69,30 @@ class KakaoSearchRequest(
     }
 }
 
-@Serializable
 class KakaoBlogSearchResponse(
         val meta: Meta,
         val documents:List<Document>
 ){
 
-    @Serializable
     class Meta(
             val total_count:Int,
             val pageable_count:Int,
             val is_end:Boolean
     )
 
-    @Serializable
     class Document(
             val title:String,
             val contents:String,
             val url:String,
             val blogname:String,
             val thumbnail:String,
-            val datetime:String
+            val datetime:ZonedDateTime
     )
-    fun toBlogSearchResponse(): BlogSearchResponse {
+    fun toBlogSearchResponse(startIndex: Int, size: Int): BlogSearchResponse {
         return BlogSearchResponse(
-                this.meta.run { BlogSearchResponse.Meta(total_count, pageable_count, is_end) },
-                this.documents.map { it.run { BlogSearchResponse.Document(title, contents, url, blogname, thumbnail, datetime) } }
+                //  total_count도 있지만 실제로 조회할수 있는 수는 pageable_count기에 pageavle_count를 리턴함
+                this.meta.run { BlogSearchResponse.Meta(pageable_count, startIndex, size) },
+                this.documents.map { it.run { BlogSearchResponse.Document(title, contents, url, blogname, datetime.toLocalDate()) } }
         )
     }
 }
