@@ -14,12 +14,15 @@ class BlogSearchService(
         private val searchKeywordLogRepository: SearchKeywordLogRepository,
 ) {
     fun getData(searchRequest: SearchRequest): BlogSearchResponse? {
-        val res = try{ kakaoBlogSearch.getBlogData(searchRequest) }
-        catch (e:Exception){naverBlogSearch.getBlogData(searchRequest)}
+        val res = try {
+            kakaoBlogSearch.getBlogData(searchRequest)
+        } catch (e: Exception) {
+            naverBlogSearch.getBlogData(searchRequest)
+        }
 
         try {
             searchKeywordLogRepository.save(SearchKeywordLog(keyword = searchRequest.query))
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
