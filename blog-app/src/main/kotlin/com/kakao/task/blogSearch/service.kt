@@ -1,17 +1,16 @@
 package com.kakao.task.blogSearch
 
+import com.kakao.task.domain.blogSearch.BlogSearch
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLog
 import com.kakao.task.domain.searchKeywordLog.SearchKeywordLogRepository
 import com.kakao.task.domain.blogSearch.BlogSearchResponse
-import com.kakao.task.externalApi.KakaoBlogSearch
-import com.kakao.task.externalApi.NaverBlogSearch
 import com.kakao.task.domain.blogSearch.SearchRequest
 import org.springframework.stereotype.Service
 
 @Service
 class BlogSearchService(
-        private val kakaoBlogSearch: KakaoBlogSearch,
-        private val naverBlogSearch: NaverBlogSearch,
+        private val kakaoBlogSearch: BlogSearch,
+        private val naverBlogSearch: BlogSearch,
         private val searchKeywordLogRepository: SearchKeywordLogRepository,
 ) {
     fun getData(searchRequest: SearchRequest): BlogSearchResponse? {
