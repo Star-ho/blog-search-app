@@ -1,5 +1,8 @@
 package com.kakao.task.domain.blogSearch
 
+import java.lang.IllegalArgumentException
+import java.time.LocalDate
+
 interface BlogSearch{
     fun getBlogData(searchRequest: SearchRequest): BlogSearchResponse?
 }
@@ -7,21 +10,24 @@ interface BlogSearch{
 class SearchRequest(
         val query:String,
         val sort: Sort = Sort.accuracy,
-        //TODO: 2023/03/20 page가 0이하일때 밸리데이션  - 성호
         val page:Int = 1,
         val size:Int = 10,
 ){
+    init {
+        if(page < 1) throw IllegalArgumentException("0이하 페이지는 조회할 수 없습니다")
+        if(page > 100) throw IllegalArgumentException("100번을 초과하는 페이지는 조회할 수 없습니다")
+        if(size < 1) throw IllegalArgumentException("1개 미만 조회할 수 없습니다")
+        if(size > 100) throw IllegalArgumentException("100개를 초과하여 조회할 수 없습니다")
+    }
     enum class Sort{
         accuracy,recency
     }
 }
-//TODO: 2023/03/20 리스폰스 매핑  - 성호
 class BlogSearchResponse(
         val meta: Meta,
         val documents:List<Document>
 ){
     class Meta(
-            //TODO: 2023/03/20 페이지 카운트 구할때 에러  - 성호
             val total:Int,
             val start:Int,
             val size:Int
