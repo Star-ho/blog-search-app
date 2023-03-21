@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 import java.time.ZonedDateTime
 
-//TODO: 2023/03/21 프로퍼티로 뺴기  - 성호
 private const val KAKAKO_API_HOST= "dapi.kakao.com"
 private const val KAKAO_BLOG_SEARCH_API_PATH = "/v2/search/blog"
 private const val KAKAO_AUTH = "KakaoAK 3a81015bc9f0bfb464989a4da0af716f"
