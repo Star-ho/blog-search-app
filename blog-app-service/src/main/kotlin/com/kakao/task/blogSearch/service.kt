@@ -15,6 +15,7 @@ class BlogSearchService(
 ) {
     fun getData(searchRequest: SearchRequest): BlogSearchResponse? {
         val res = try {
+            if(searchRequest.size > 50 && searchRequest.page > 50) naverBlogSearch.getBlogData(searchRequest)
             kakaoBlogSearch.getBlogData(searchRequest)
         } catch (e: Exception) {
             naverBlogSearch.getBlogData(searchRequest)
