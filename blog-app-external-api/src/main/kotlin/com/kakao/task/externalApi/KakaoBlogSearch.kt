@@ -4,6 +4,7 @@ import com.kakao.task.domain.blogSearch.BlogSearch
 import com.kakao.task.domain.blogSearch.BlogSearchResponse
 import com.kakao.task.domain.blogSearch.SearchRequest
 import kotlinx.serialization.Serializable
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -11,10 +12,11 @@ import java.time.ZonedDateTime
 
 private const val KAKAKO_API_HOST= "dapi.kakao.com"
 private const val KAKAO_BLOG_SEARCH_API_PATH = "/v2/search/blog"
-private const val KAKAO_AUTH = "KakaoAK 3a81015bc9f0bfb464989a4da0af716f"
 
 @Component
-class KakaoBlogSearch: BlogSearch {
+class KakaoBlogSearch(
+    @Qualifier("kakaoAuth") private val kakaoAuth:String
+): BlogSearch {
     override fun getBlogData(searchRequest: SearchRequest): BlogSearchResponse? {
         val kakaoSearchRequest = searchRequest.toKakaoSearchRequest()
 
@@ -30,7 +32,7 @@ class KakaoBlogSearch: BlogSearch {
                             .build()
                 }
                 .headers {
-                    it.set("Authorization", KAKAO_AUTH)
+                    it.set("Authorization", kakaoAuth)
                     it.contentType = MediaType.APPLICATION_JSON
                 }.retrieve()
                 .bodyToMono(KakaoBlogSearchResponse::class.java)

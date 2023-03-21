@@ -5,6 +5,7 @@ import com.kakao.task.domain.blogSearch.BlogSearch
 import com.kakao.task.domain.blogSearch.BlogSearchResponse
 import com.kakao.task.domain.blogSearch.SearchRequest
 import kotlinx.serialization.Serializable
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -12,10 +13,12 @@ import java.time.LocalDate
 
 private const val NAVER_API_HOST = "openapi.naver.com"
 private const val NAVER_BLOG_SEARCH_API_PATH = "/v1/search/blog"
-private const val NAVER_CLIENT_ID = "8sxE0aH9L3TpiYWbD1F1"
-private const val NAVER_CLIENT_SECRET = "sxqThuV909"
+
 @Component
-class NaverBlogSearch: BlogSearch {
+class NaverBlogSearch(
+    @Qualifier("naverClientId") val naverClientId:String,
+    @Qualifier("naverClientSecret") val naverClientSecret:String,
+): BlogSearch {
     override fun getBlogData(searchRequest: SearchRequest): BlogSearchResponse? {
         val naverSearchRequest = searchRequest.toNaverSearchRequest()
         val webClient = WebClient.create()
@@ -32,8 +35,8 @@ class NaverBlogSearch: BlogSearch {
                             .build()
                 }
                 .headers {
-                    it.set("X-Naver-Client-Id", NAVER_CLIENT_ID)
-                    it.set("X-Naver-Client-Secret", NAVER_CLIENT_SECRET)
+                    it.set("X-Naver-Client-Id", naverClientId)
+                    it.set("X-Naver-Client-Secret", naverClientSecret)
                     it.contentType = MediaType.APPLICATION_JSON
                 }.retrieve()
                 .bodyToMono(NaverBlogSearchResponse::class.java)
