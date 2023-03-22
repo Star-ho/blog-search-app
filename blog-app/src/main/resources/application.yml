@@ -11,10 +11,6 @@ spring:
     console:
       enabled: true
 
-logging:
-  level:
-    root: debug
-
 kakao:
   auth: KakaoAK 3a81015bc9f0bfb464989a4da0af716f
 
