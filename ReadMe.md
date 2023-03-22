@@ -37,7 +37,7 @@ java -jar blog-app.jar
 - 테스트를 위한 최소한의 라이브러리를 가지며, 순수한 코틀린으로 작성하였습니다
 
 - blog-app-service
-- blog-app-domain에서 작성한 도메인을 사용하여 서비스의 비즈니스 로직을 구현하였습니다
+- blog-app-domain에서 작성한 도메인을 사용하여 서비스 로직을 구현하였습니다
 - 순수 코틀린으로 작성한것이 아닌 spring 라이브러리를 추가하였습니다
 - blog-app-domain를 의존합니다
 
