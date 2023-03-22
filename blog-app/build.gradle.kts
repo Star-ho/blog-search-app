@@ -16,7 +16,6 @@ dependencies {
 
     // spring
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     // kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -26,10 +25,8 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    testImplementation("io.ktor:ktor-client-core:${rootProject.extra.get("ktorVersion")}")
-    testImplementation("io.ktor:ktor-client-cio:${rootProject.extra.get("ktorVersion")}")
-    testImplementation("io.ktor:ktor-client-content-negotiation:${rootProject.extra.get("ktorVersion")}")
     testImplementation("io.kotest:kotest-runner-junit5:${rootProject.extra.get("kotestVersion")}")
     testImplementation("io.kotest:kotest-assertions-core:${rootProject.extra.get("kotestVersion")}")
     testImplementation("io.kotest:kotest-extensions-spring:${rootProject.extra.get("kotestVersion")}")
+    testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 }
