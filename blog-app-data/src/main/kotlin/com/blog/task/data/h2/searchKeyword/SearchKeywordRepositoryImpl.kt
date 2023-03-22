@@ -20,7 +20,7 @@ class SearchKeywordRepositoryImpl(
 
     override fun updateSearchKeywordHitCount(id:Long, addedHitCount:BigDecimal){
         val updateRowNum = searchKeywordJpaRepository.updateHitCountByKeyword(id,addedHitCount)
-        if(updateRowNum != 1) throw EntityNotFoundException("검색 키워드가 존재하지 않습니다")
+        if(updateRowNum != 1) throw EntityNotFoundException("조회수 업데이트 실패")
     }
 
     override fun save(searchKeyword: SearchKeyword){
