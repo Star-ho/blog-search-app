@@ -1,4 +1,4 @@
-create table SEARCH_KEYWORD
+create table IF NOT EXISTS SEARCH_KEYWORD
 (
     ID        bigint auto_increment,
     KEYWORD   varchar(255) not null,
@@ -10,7 +10,7 @@ create table SEARCH_KEYWORD
 );
 
 
-create table SEARCH_KEYWORD_LOG
+create table IF NOT EXISTS SEARCH_KEYWORD_LOG
 (
     ID         bigint       not null,
     KEYWORD    varchar(255) not null,
@@ -19,7 +19,7 @@ create table SEARCH_KEYWORD_LOG
         primary key (ID)
 );
 
-create table SEQUENCE
+create table IF NOT EXISTS SEQUENCE
 (
     NAME     varchar(50)      not null,
     SEQUENCE bigint default 0 not null,
