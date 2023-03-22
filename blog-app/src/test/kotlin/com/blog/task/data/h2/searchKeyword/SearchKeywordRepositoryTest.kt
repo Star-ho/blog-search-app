@@ -103,15 +103,16 @@ class SearchKeywordRepositoryTest(
                 it("id가 존재할떄") {
                     val keyword = "keyword"
                     val hitCount = BigDecimal.TEN
-                    entityManager.persist(SearchKeywordDao(0, keyword,hitCount))
+                    val savedSearchKeyword = SearchKeywordDao(0, keyword,hitCount)
+                    entityManager.persist(savedSearchKeyword)
                     entityManager.flush()
                     entityManager.clear()
 
                     val hitCountForAdd = BigDecimal(13)
-                    searchKeywordRepository.updateSearchKeywordHitCount(1,hitCountForAdd)
+                    searchKeywordRepository.updateSearchKeywordHitCount(savedSearchKeyword.id,hitCountForAdd)
 
                     val searchKeywordDao = entityManager.createQuery(
-                            "select SKD from SearchKeywordDao SKD where SKD.keyword = keyword",SearchKeywordDao::class.java
+                            "select SKD from SearchKeywordDao SKD where SKD.id = ${savedSearchKeyword.id}",SearchKeywordDao::class.java
                     ).singleResult
                     entityManager.flush()
                     entityManager.clear()
