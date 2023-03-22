@@ -39,7 +39,7 @@ class KakaoBlogSearch(
     }
 
     private fun calculateStartIndex(kakaoSearchRequest: KakaoSearchRequest): Int {
-        return kakaoSearchRequest.page*(kakaoSearchRequest.size-1)
+        return (kakaoSearchRequest.page-1)*kakaoSearchRequest.size+1
     }
 
     private fun SearchRequest.toKakaoSearchRequest(): KakaoSearchRequest {

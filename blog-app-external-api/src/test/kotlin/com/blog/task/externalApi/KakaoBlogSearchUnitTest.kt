@@ -30,7 +30,7 @@ class KakaoBlogSearchUnitTest : DescribeSpec({
 
         it("응답 파라미터 테스트") {
             res shouldNotBe null
-            res?.meta?.start shouldBe 57
+            res?.meta?.start shouldBe 41
             res?.meta?.size shouldBe 20
             res?.meta?.total shouldBe 10
         }
