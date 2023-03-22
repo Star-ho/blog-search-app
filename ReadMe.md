@@ -20,9 +20,8 @@
 - MockK(코틀린 mock 라이브러리)
 
 ## 실행방법(사용방법)
-
-- 프로젝트 루트 디렉토리에 있는 `blog-app.jar` 파일을 실행합니다.
-- 아래의 명령어를 실행합니다.
+- jar 파일 다운로드 링크입니다 [링크](https://github.com/Sung-ho94/blog-search-app/raw/master/blog-app.jar)
+- 다운로드 받은 `blog-app.jar` 파일을 아래의 명령어로 실행합니다.
 
 ```
 java -jar blog-app.jar
