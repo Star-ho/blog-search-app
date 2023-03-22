@@ -17,11 +17,3 @@ dependencies {
     // database
     runtimeOnly("com.h2database:h2")
 }
-
-allOpen {
-    annotation("javax.persistence.Entity")
-}
-
-noArg{
-    annotation("javax.persistence.Entity")
-}
