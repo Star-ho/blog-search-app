@@ -4,9 +4,13 @@ import com.blog.task.domain.blogSearch.SearchRequest
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
-class NaverBlogSearchTest:DescribeSpec({
-    val naverBlogSearch = NaverBlogSearch()
+@SpringBootTest
+class NaverBlogSearchTest(
+    @Autowired naverBlogSearch: NaverBlogSearch
+):DescribeSpec({
 
     describe("네이버 블로그 검색 요청 테스트"){
         context("요청한 페이지 갯수만큼 리턴한다"){

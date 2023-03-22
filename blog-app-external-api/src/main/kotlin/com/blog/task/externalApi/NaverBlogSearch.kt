@@ -6,10 +6,11 @@ import com.blog.task.domain.blogSearch.BlogSearchResponse
 import com.blog.task.domain.blogSearch.SearchRequest
 import kotlinx.serialization.Serializable
 import org.springframework.beans.factory.annotation.Qualifier
-import org.springframework.http.MediaType
+import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Component
-import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.util.UriComponentsBuilder
 import java.time.LocalDate
+import java.util.function.Consumer
 
 private const val NAVER_API_HOST = "openapi.naver.com"
 private const val NAVER_BLOG_SEARCH_API_PATH = "/v1/search/blog"
@@ -18,33 +19,30 @@ private const val NAVER_BLOG_SEARCH_API_PATH = "/v1/search/blog"
 class NaverBlogSearch(
     @Qualifier("naverClientId") val naverClientId:String,
     @Qualifier("naverClientSecret") val naverClientSecret:String,
+    private val blogWebClient: BlogWebClient
 ): BlogSearch {
     override fun getBlogData(searchRequest: SearchRequest): BlogSearchResponse? {
         val naverSearchRequest = searchRequest.toNaverSearchRequest()
-        val webClient = WebClient.create()
-//TODO: 2023/03/22 목 테스트 진행  - 성호
-        return webClient.get()
-                .uri{
-                    it.scheme("https")
-                            .host(NAVER_API_HOST)
-                            .path(NAVER_BLOG_SEARCH_API_PATH)
-                            .queryParam("query",naverSearchRequest.query)
-                            .queryParam("display",naverSearchRequest.display)
-                            .queryParam("start",naverSearchRequest.start)
-                            .queryParam("sort",naverSearchRequest.sort.value)
-                            .build()
-                }
-                .headers {
-                    it.set("X-Naver-Client-Id", naverClientId)
-                    it.set("X-Naver-Client-Secret", naverClientSecret)
-                    it.contentType = MediaType.APPLICATION_JSON
-                }.retrieve()
-                .bodyToMono(NaverBlogSearchResponse::class.java)
-                .block()?.toBlogSearchResponse()
+        val uri = UriComponentsBuilder.newInstance().scheme("https")
+            .host(NAVER_API_HOST)
+            .path(NAVER_BLOG_SEARCH_API_PATH)
+            .queryParam("query",naverSearchRequest.query)
+            .queryParam("display",naverSearchRequest.display)
+            .queryParam("start",naverSearchRequest.start)
+            .queryParam("sort",naverSearchRequest.sort.value)
+            .build().toUri()
+
+        val headers = Consumer<HttpHeaders>{
+            it.set("X-Naver-Client-Id", naverClientId)
+            it.set("X-Naver-Client-Secret", naverClientSecret)
+        }
+
+        return blogWebClient.get(uri,headers,NaverBlogSearchResponse::class.java)
+            ?.toBlogSearchResponse()
     }
 
     private fun SearchRequest.toNaverSearchRequest(): NaverBlogSearchRequest {
-        return NaverBlogSearchRequest(query, size, (page*size)-(size)+1, NaverBlogSearchRequest.Sort.of(this.sort.name))
+        return NaverBlogSearchRequest(query, size, (page-1)*size+1, NaverBlogSearchRequest.Sort.of(this.sort.name))
     }
 }
 

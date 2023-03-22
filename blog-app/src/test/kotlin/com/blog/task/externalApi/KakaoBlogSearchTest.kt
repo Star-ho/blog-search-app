@@ -5,9 +5,13 @@ import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import io.kotest.matchers.string.shouldContain
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
-class KakaoBlogSearchTest: DescribeSpec({
-    val kakaoBlogSearch = KakaoBlogSearch()
+@SpringBootTest
+class KakaoBlogSearchTest(
+    @Autowired private val kakaoBlogSearch: KakaoBlogSearch
+): DescribeSpec({
 
     describe("카카오 블로그 검색 요청 테스트"){
         context("요청한 페이지 갯수만큼 리턴한다"){

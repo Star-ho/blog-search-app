@@ -16,7 +16,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:${rootProject.extra.get("ktorVersion")}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    testImplementation("com.ninja-squad:springmockk:3.0.1")
     testImplementation("io.kotest:kotest-runner-junit5:${rootProject.extra.get("kotestVersion")}")
     testImplementation("io.kotest:kotest-assertions-core:${rootProject.extra.get("kotestVersion")}")
-
 }
