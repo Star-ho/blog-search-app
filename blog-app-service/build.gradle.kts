@@ -11,7 +11,6 @@ plugins {
 dependencies {
 	// module
 	implementation(project(":blog-app-domain"))
-	implementation(project(":blog-app-external-api"))
 
 	// spring
 	implementation("org.springframework.boot:spring-boot-starter-web")
