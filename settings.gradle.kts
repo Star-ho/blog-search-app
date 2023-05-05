@@ -1,4 +1,4 @@
-rootProject.name = "kb-task"
+rootProject.name = "blog-serach-app"
 include("blog-app-service")
 include("blog-app-data-h2")
 include("blog-app-domain")
