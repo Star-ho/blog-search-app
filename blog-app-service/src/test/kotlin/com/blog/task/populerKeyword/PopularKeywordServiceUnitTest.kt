@@ -1,5 +1,6 @@
 package com.blog.task.populerKeyword
 
+import com.blog.task.domain.popularKeyword.PopularKeywordService
 import com.blog.task.domain.searchKeyword.SearchKeyword
 import com.blog.task.domain.searchKeyword.SearchKeywordRepository
 import io.kotest.core.spec.style.DescribeSpec
