@@ -28,7 +28,7 @@ class BlogSearchServiceUnitTest : DescribeSpec({
                 BlogSearchResponse.Meta(10,1,10),
                 listOf(BlogSearchResponse.Document("title","contents","url","blog-name", LocalDate.now()))
         )
-        every { searchKeywordLogRepository.save(any()) } returns Unit
+        every { searchKeywordLogRepository.saveWithNoThrow(any()) } returns Unit
 
         it("카카오 블로그 검색 테스트"){
             val searchRequestSlot = slot<SearchRequest>()
@@ -69,12 +69,12 @@ class BlogSearchServiceUnitTest : DescribeSpec({
         it("검색 로그 저장 테스트"){
             val searchKeywordLogSlot = slot<SearchKeywordLog>()
             every { kakaoBlogSearch.getBlogData(any()) } returns blogSearchResponse
-            every { searchKeywordLogRepository.save(capture(searchKeywordLogSlot)) } returns Unit
+            every { searchKeywordLogRepository.saveWithNoThrow(capture(searchKeywordLogSlot)) } returns Unit
 
             blogSearchService.getData(searchRequest)
 
 
-            verify(exactly = 1) { searchKeywordLogRepository.save(capture(searchKeywordLogSlot)) }
+            verify(exactly = 1) { searchKeywordLogRepository.saveWithNoThrow(capture(searchKeywordLogSlot)) }
             val capturedRequest = searchKeywordLogSlot.captured
             capturedRequest.keyword.value shouldBe  searchRequest.query
         }

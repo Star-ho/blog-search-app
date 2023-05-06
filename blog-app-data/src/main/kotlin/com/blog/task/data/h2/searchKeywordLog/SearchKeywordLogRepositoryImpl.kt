@@ -11,7 +11,11 @@ class SearchKeywordLogRepositoryImpl(
     override fun findByGraterThanId(id:Long): List<SearchKeywordLog> {
         return searchKeywordLogJpaRepository.findByGraterThanId(id).map { it.toEntity() }
     }
-    override fun save(searchKeywordLog: SearchKeywordLog){
-        searchKeywordLogJpaRepository.save(SearchKeywordLogDao.of(searchKeywordLog))
+    override fun saveWithNoThrow(searchKeywordLog: SearchKeywordLog) {
+        try {
+            searchKeywordLogJpaRepository.save(SearchKeywordLogDao.of(searchKeywordLog))
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
     }
 }

@@ -1,11 +1,9 @@
-package com.blog.task.populerKeyword
+package com.blog.task.domain.popularKeyword
 
 import com.blog.task.domain.searchKeyword.SearchKeywordRepository
 import kotlinx.serialization.Serializable
-import org.springframework.stereotype.Component
 
 
-@Component
 class PopularKeywordService(
         private val searchKeywordRepository: SearchKeywordRepository
 ){
