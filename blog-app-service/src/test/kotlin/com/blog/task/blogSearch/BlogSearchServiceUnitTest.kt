@@ -1,11 +1,12 @@
 package com.blog.task.blogSearch
 
+import com.blog.task.domain.blogSearch.BlogSearch
 import com.blog.task.domain.searchKeywordLog.SearchKeywordLog
 import com.blog.task.domain.searchKeywordLog.SearchKeywordLogRepository
 import com.blog.task.domain.blogSearch.BlogSearchResponse
-import com.blog.task.externalApi.KakaoBlogSearch
-import com.blog.task.externalApi.NaverBlogSearch
+import com.blog.task.domain.blogSearch.BlogSearchService
 import com.blog.task.domain.blogSearch.SearchRequest
+import io.kotest.core.spec.IsolationMode
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -15,8 +16,11 @@ import io.mockk.verify
 import java.time.LocalDate
 
 class BlogSearchServiceUnitTest : DescribeSpec({
-    val kakaoBlogSearch: KakaoBlogSearch = mockk()
-    val naverBlogSearch: NaverBlogSearch = mockk()
+
+    isolationMode = IsolationMode.InstancePerLeaf
+
+    val kakaoBlogSearch: BlogSearch = mockk()
+    val naverBlogSearch: BlogSearch = mockk()
     val searchKeywordLogRepository: SearchKeywordLogRepository = mockk()
 
     val blogSearchService = BlogSearchService(kakaoBlogSearch, naverBlogSearch, searchKeywordLogRepository)
