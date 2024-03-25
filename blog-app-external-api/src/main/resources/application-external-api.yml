@@ -1,0 +1,10 @@
+kakao:
+  auth: KakaoAK 3a81015bc9f0bfb464989a4da0af716f
+
+naver:
+  clientId: 8sxE0aH9L3TpiYWbD1F1
+  clientSecret: sxqThuV909
+
+logging:
+  level:
+    com.blog.task.externalApi : debug

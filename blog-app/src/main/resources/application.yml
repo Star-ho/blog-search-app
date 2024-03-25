@@ -1,19 +1,8 @@
 spring:
-  jpa:
-    open-in-view: false
-    database-platform: org.hibernate.dialect.H2Dialect
-  datasource:
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-    url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE
-  h2:
-    console:
-      enabled: true
+  config:
+    import:
+      - application-data.yml
+      - application-external-api.yml
 
-kakao:
-  auth: KakaoAK 3a81015bc9f0bfb464989a4da0af716f
 
-naver:
-  clientId: 8sxE0aH9L3TpiYWbD1F1
-  clientSecret: sxqThuV909
+
